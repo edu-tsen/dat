@@ -84,7 +84,7 @@ func (b *SelectDocBuilder) ToSQL() (string, []interface{}) {
 			SELECT 	ID,
 				NAME,
 				(
-					select ARRAY_AGG(dat__1.*)
+					select COALESCE(ARRAY_AGG(dat__1.*),'{}')
 					from (
 						SELECT ID, user_id, title FROM posts WHERE posts.user_id = people.id
 					) as dat__1
@@ -127,7 +127,7 @@ func (b *SelectDocBuilder) ToSQL() (string, []interface{}) {
 
 	/*
 		(
-			select ARRAY_AGG(dat__1.*)
+			select COALESCE(ARRAY_AGG(dat__1.*),'{}')
 			from (
 				SELECT ID, user_id, title FROM posts WHERE posts.user_id = people.id
 			) as dat__1
@@ -135,9 +135,9 @@ func (b *SelectDocBuilder) ToSQL() (string, []interface{}) {
 	*/
 
 	for _, sub := range b.subQueries {
-		buf.WriteString(", (SELECT array_agg(dat__")
+		buf.WriteString(", (SELECT coalesce(array_agg(dat__")
 		buf.WriteString(sub.alias)
-		buf.WriteString(".*) FROM (")
+		buf.WriteString(".*),'{}') FROM (")
 		sub.WriteRelativeArgs(buf, &args, &placeholderStartPos)
 		buf.WriteString(") AS dat__")
 		buf.WriteString(sub.alias)
