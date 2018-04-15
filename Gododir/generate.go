@@ -36,8 +36,8 @@ func generateTasks(p *do.Project) {
 	p.Task("builder-boilerplate", nil, func(c *do.Context) {
 		context := do.M{
 			"builders": []string{"CallBuilder", "DeleteBuilder", "InsectBuilder",
-				"InsertBuilder", "RawBuilder", "SelectBuilder", "SelectDocBuilder",
-				"UpdateBuilder", "UpsertBuilder"},
+				"InsertBuilder", "InsertQueryBuilder", "RawBuilder", "SelectBuilder",
+				"SelectDocBuilder", "UpdateBuilder", "UpsertBuilder"},
 		}
 
 		s, err := util.StrTemplate(builderTemplate, context)

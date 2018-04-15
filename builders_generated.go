@@ -71,6 +71,23 @@ func (b *InsertBuilder) SetIsInterpolated(enable bool) *InsertBuilder {
 }
 
 // Interpolate interpolates this builders sql.
+func (b *InsertQueryBuilder) Interpolate() (string, []interface{}, error) {
+	return interpolate(b)
+}
+
+// IsInterpolated determines if this builder will interpolate when
+// Interpolate() is called.
+func (b *InsertQueryBuilder) IsInterpolated() bool {
+	return b.isInterpolated
+}
+
+// SetIsInterpolated sets whether this builder should interpolate.
+func (b *InsertQueryBuilder) SetIsInterpolated(enable bool) *InsertQueryBuilder	 {
+	b.isInterpolated = enable
+	return b
+}
+
+// Interpolate interpolates this builders sql.
 func (b *RawBuilder) Interpolate() (string, []interface{}, error) {
 	return interpolate(b)
 }

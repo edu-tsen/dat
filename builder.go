@@ -35,6 +35,12 @@ func InsertInto(table string) *InsertBuilder {
 	return b
 }
 
+func InsertQuery(table string) *InsertQueryBuilder {
+	b := NewInsertQueryBuilder(table)
+	b.Execer = nullExecer
+	return b
+}
+
 // Insect inserts into a table if does not exist.
 func Insect(table string) *InsectBuilder {
 	b := NewInsectBuilder(table)

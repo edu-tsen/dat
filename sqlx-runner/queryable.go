@@ -94,6 +94,11 @@ func (q *Queryable) InsertInto(table string) *dat.InsertBuilder {
 	return b
 }
 
+func (q *Queryable) InsertQuery(table string) *dat.InsertQueryBuilder {
+	b := dat.NewInsertQueryBuilder(table)
+	b.Execer = NewExecer(q.runner, b)
+	return b
+}
 // Insect inserts or selects.
 func (q *Queryable) Insect(table string) *dat.InsectBuilder {
 	b := dat.NewInsectBuilder(table)
