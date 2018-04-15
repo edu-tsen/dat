@@ -163,8 +163,8 @@ func (ex *Execer) QueryObject(dest interface{}) error {
 // QueryJSON wraps the builder's query within a `to_json` then executes and returns
 // the JSON []byte representation.
 func (ex *Execer) QueryJSON() ([]byte, error) {
-	if _, ok := ex.builder.(*dat.SelectDocBuilder); ok {
-		return ex.queryJSONBlob(false)
+	if b, ok := ex.builder.(*dat.SelectDocBuilder); ok {
+		return ex.queryJSONBlob(b.HasSingleResult())
 	}
 
 	return ex.queryJSON()

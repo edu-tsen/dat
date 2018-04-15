@@ -12,12 +12,13 @@ type SelectDocBuilder struct {
 	subQueriesOne []*subInfo
 	innerSQL      *Expression
 	isParent      bool
+	hasSingleResult bool
 }
 
 // NewSelectDocBuilder creates an instance of SelectDocBuilder.
 func NewSelectDocBuilder(columns ...string) *SelectDocBuilder {
 	sb := NewSelectBuilder(columns...)
-	return &SelectDocBuilder{SelectBuilder: sb, isParent: true}
+	return &SelectDocBuilder{SelectBuilder: sb, isParent: true, hasSingleResult: false}
 }
 
 // InnerSQL sets the SQL after the SELECT (columns...) statement
@@ -60,6 +61,15 @@ func (b *SelectDocBuilder) One(column string, sqlOrBuilder interface{}, a ...int
 		b.subQueriesOne = append(b.subQueriesOne, &subInfo{Expr(t, a...), column})
 	}
 	return b
+}
+
+func (b *SelectDocBuilder) SingleResult() *SelectDocBuilder {
+	b.hasSingleResult = true
+	return b
+}
+
+func (b *SelectDocBuilder) HasSingleResult() bool {
+	return b.hasSingleResult
 }
 
 // ToSQL serialized the SelectBuilder to a SQL string
