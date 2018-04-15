@@ -3,7 +3,7 @@ package runner
 import (
 	"testing"
 
-	"github.com/Janulka/dat"
+	"github.com/edu-tsen/dat"
 )
 
 // These benchmarks compare the time to excute an interpolated SQL

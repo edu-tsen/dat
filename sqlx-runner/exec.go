@@ -14,8 +14,8 @@ import (
 	"github.com/jmoiron/sqlx"
 	"github.com/lib/pq"
 	guid "github.com/satori/go.uuid"
-	"github.com/Janulka/dat"
-	"github.com/Janulka/dat/kvs"
+	"github.com/edu-tsen/dat"
+	"github.com/edu-tsen/dat/kvs"
 )
 
 // database is the interface for sqlx's DB or Tx against which

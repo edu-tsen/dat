@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/Janulka/dat"
+	"github.com/edu-tsen/dat"
 )
 
 // DB represents an abstract database connection pool.
